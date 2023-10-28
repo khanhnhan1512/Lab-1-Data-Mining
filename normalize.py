@@ -23,7 +23,7 @@ def min_max_method(feature):
 
 def num_feature(data):
     num_feature = [feature for feature in data.keys()]
-    for feature in num_feature:
+    for feature in data.keys():
         for value in data[feature]:
             if type(value) == str:
                 num_feature.remove(feature)
@@ -42,9 +42,14 @@ def normalize(data, column, method):
         raise ValueError('Method must be min-max or z-score')
     
 def main():
-    data = read_file('house-prices.csv')
-    normalize(data, 'LotFrontage', 'z-score')
-    create_csv_file('result.csv', data)
+    arguments = parse_cmd()
+    filename = arguments[0].split('=')[1]
+    method = arguments[1].split('=')[1]
+    column = arguments[2].split('=')[1]
+    filename_out = arguments[3].split('=')[1]
+    data = read_file(filename)
+    normalize(data, column, method)
+    create_csv_file(filename_out, data)
     
 if __name__ == '__main__':
     main()

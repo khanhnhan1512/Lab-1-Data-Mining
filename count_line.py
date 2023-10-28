@@ -9,8 +9,10 @@ def count_line_with_missing_values(data) -> int:
     return len(index_empty_row)
 
 def main():
-    data = read_file('house-prices.csv')
-    print(f"There are {count_line_with_missing_values(data)} lines with missing values")
+    arguments = parse_cmd()
+    filename = arguments[0].split('=')[1]
+    data = read_file(filename)
+    print(f"There are total {count_line_with_missing_values(data)} lines with missing values")
     
 if __name__ == '__main__':
     main()

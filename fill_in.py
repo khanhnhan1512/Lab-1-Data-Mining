@@ -25,14 +25,14 @@ def fill_in(data, method, column) -> None:
   empty_row = index_empty_row(data, column)
   if method == 'mean':
     if column not in num_attr:
-      raise ValueError('Column must be numerical')
+      raise ValueError('Column must be numerical or not have missing value')
     else:
       for index in empty_row:
         data[column][index] = 0
       missing_value = sum(data[column]) / len(data[column])    
   elif method == 'median':
       if column not in num_attr:
-        raise ValueError('Column must be numerical')
+        raise ValueError('Column must be numerical or not have missing value')
       else:
         not_empty_row = [data[column][i] for i in range(len(data[column])) if i not in empty_row]
         number_not_empty_row = len(not_empty_row)
@@ -42,7 +42,7 @@ def fill_in(data, method, column) -> None:
           missing_value = not_empty_row[number_not_empty_row//2]
   elif method == 'mod':
     if column not in cate_attr:
-      raise ValueError('Column must be categorical')
+      raise ValueError('Column must be categorical or not have missing value')
     else:
       value_dict = {}
       for index in range(len(data[column])):
@@ -56,13 +56,22 @@ def fill_in(data, method, column) -> None:
   else:
       raise ValueError('Method must be mean, median, or mode')
   # Fill missing value
+  print(f'The missing value is {missing_value}')
   for index in empty_row:
     data[column][index] = missing_value
     
 def main():
-    data = read_file('house-prices.csv')
-    fill_in(data, 'mod', 'Alley')
-    create_csv_file('result.csv', data)
+    # get all the arguments from command line
+    arguments = parse_cmd()
+    # parsing to get the arguments
+    filename = arguments[0].split('=')[1]
+    method = arguments[1].split('=')[1]
+    column = arguments[2].split('=')[1]
+    filename_out = arguments[3].split('=')[1]
+    ##############################
+    data = read_file(filename)
+    fill_in(data, method, column)
+    create_csv_file(filename_out, data)
     
 if __name__ == '__main__':
     main()

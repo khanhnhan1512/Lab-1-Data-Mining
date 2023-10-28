@@ -11,8 +11,13 @@ def extract_column(data) -> list:
     return result
 
 def main():
-    data = read_file('house-prices.csv')
-    print(extract_column(data))
+    argments = parse_cmd()
+    filename = argments[0].split('=')[1]
+    data = read_file(filename)
+    columns = extract_column(data)
+    print(f'There are {len(columns)} columns with missing values: ')
+    for column in columns:
+        print(column)
     
 if __name__ == '__main__':
     main()

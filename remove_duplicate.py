@@ -19,10 +19,15 @@ def remove_duplicate(data):
     for index in index_deleted_rows:
         for feature in data.keys():
             data[feature].pop(index)
+    print(f'Removed {len(index_deleted_rows)} duplicate row(s).')
 
 def main():
-    data = read_file('house-prices.csv')      
+    arguments = parse_cmd()
+    filename = arguments[0].split('=')[1]  
+    filename_out = arguments[1].split('=')[1]
+    data = read_file(filename)      
     remove_duplicate(data)
+    create_csv_file(filename_out, data)
     
 if __name__ == '__main__':
     main()
