@@ -68,8 +68,9 @@ def main():
     method = arguments[1].split('=')[1]
     column = arguments[2].split('=')[1]
     filename_out = arguments[3].split('=')[1]
-    ##############################
+    # Load the data from the file
     data = read_file(filename)
+    # Fill in the missing values and save the new data to the output file
     fill_in(data, method, column)
     create_csv_file(filename_out, data)
     

@@ -9,7 +9,7 @@ def index_empty_row(data, column) -> list:
     return result
 # Determine the rows will be deleted
 def delete_row(data, limit_number) -> None:
-    if not (1 <= limit_number <= len(data.keys())):
+    if not (1 <= limit_number <= len(list(data.keys()))):
         raise ValueError('Invalid number of missing values')
     # Determine the indexes of missing rows in each column
     index_rows = []
@@ -22,7 +22,7 @@ def delete_row(data, limit_number) -> None:
             index_dict[index] = 1
         else:
             index_dict[index] += 1
-    # Sort this dictionary descending by keys, because the next step we will remove some row
+    # Sort this dictionary descending by keys, because the next step we will remove some rows
     # And if we remove the rows at the end first, the indexes of the rest will not be affected
     sorted_index_dict = sorted(index_dict.items(), key= lambda x: x[0], reverse=True)
     # convert it back to dictionary
@@ -37,12 +37,17 @@ def delete_row(data, limit_number) -> None:
     print(f'{count} rows have been deleted')
                 
 def main():
+    # get all the arguments from the command line
     arguments = parse_cmd()
+    # parsing the arguments
     filename = arguments[0].split('=')[1]
     limit_number = int(arguments[1].split('=')[1])
     filename_out = arguments[2].split('=')[1]
+    # Load the data from the file
     data = read_file(filename)
+    # Delete the rows with the number of missing values greater than the limit number
     delete_row(data, limit_number)
+    # save the result to the output file
     create_csv_file(filename_out, data)
     
 if __name__ == '__main__':
