@@ -35,6 +35,7 @@ def fill_in(data, method, column) -> None:
         raise ValueError('Column must be numerical or not have missing value')
       else:
         not_empty_row = [data[column][i] for i in range(len(data[column])) if i not in empty_row]
+        not_empty_row.sort()
         number_not_empty_row = len(not_empty_row)
         if number_not_empty_row % 2 == 0:
           missing_value = (not_empty_row[number_not_empty_row/2] + not_empty_row[number_not_empty_row/2 - 1])/2
