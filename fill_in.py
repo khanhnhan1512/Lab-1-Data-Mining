@@ -1,8 +1,8 @@
 from main import *
 from extract_column import *
 
-# Extract the numerical and categorical features
-def categorizing_feature(data) -> list:
+# Classify the numerical and categorical features
+def classify_features(data) -> list:
     missing_feature = extract_column(data)
     cat_feature = []
     for feature in missing_feature:
@@ -21,7 +21,7 @@ def index_empty_row(data, column) -> list:
     return result
 # Fill in the missing values
 def fill_in(data, method, column) -> None:
-  num_attr, cate_attr = categorizing_feature(data)
+  num_attr, cate_attr = classify_features(data)
   empty_row = index_empty_row(data, column)
   if method == 'mean':
     if column not in num_attr:
