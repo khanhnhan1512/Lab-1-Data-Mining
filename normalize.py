@@ -18,7 +18,18 @@ def zscore_method(feature):
     return [(value - mean)/std if not is_nan(value) else value for value in feature]
 # Apply min-max method
 def min_max_method(feature):
-    return [(value - min(feature))/(max(feature) - min(feature)) if not is_nan(value) else value 
+    for value in feature:
+        if not is_nan(value):
+            min = max = value
+            break
+        
+    for value in feature:
+        if not is_nan(value):
+            if value < min:
+                min = value
+            if value > max:
+                max = value
+    return [(value - min)/(max - min) if not is_nan(value) else value 
             for value in feature]
 # Find the numerical features
 def num_feature(data):
