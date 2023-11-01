@@ -29,7 +29,7 @@ def fill_in(data, method, column) -> None:
     else:
       for index in empty_row:
         data[column][index] = 0
-      missing_value = sum(data[column]) / len(data[column])    
+      missing_value = sum(data[column]) / (len(data[column])-len(empty_row)) 
   elif method == 'median':
       if column not in num_attr:
         raise ValueError('Column must be numerical or not have missing value')

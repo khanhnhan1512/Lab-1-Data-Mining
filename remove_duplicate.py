@@ -2,25 +2,7 @@ from main import *
 
 # Remove the duplicate rows
 def remove_duplicate(data) -> None:
-    rows = []
-    index_deleted_rows = []
-    # Determine the index of duplicate row
-    first_column = list(data.keys())[0]
-    for i in range(len(data[first_column])):
-        row = []
-        for feature in data.keys():
-            row.append(data[feature][i])
-        if row not in rows:
-            rows.append(row)
-        else:
-            index_deleted_rows.append(i)
-    # Reverse the index list for removable purpose
-    index_deleted_rows.reverse()
-    # Remove the duplicate rows
-    for index in index_deleted_rows:
-        for feature in data.keys():
-            data[feature].pop(index)
-    print(f'Removed {len(index_deleted_rows)} duplicate row(s).')
+    pass 
 
 def main():
     # get all the arguments from the command line

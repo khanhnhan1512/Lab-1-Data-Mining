@@ -22,7 +22,7 @@ def min_max_method(feature):
         if not is_nan(value):
             min = max = value
             break
-        
+    # find min and max    
     for value in feature:
         if not is_nan(value):
             if value < min:
