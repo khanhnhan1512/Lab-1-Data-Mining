@@ -17,8 +17,6 @@ def remove_duplicate(data) -> None:
             unquie_rows[str(row)] = 1
         else:
             deleted_index.append(i)
-    # Sort the deleted index list in descending for avoid deleting the wrong row
-    deleted_index.sort(reverse=True)
     # delete the duplicate rows
     for col in data.keys():
         data[col] = [data[col][i] for i in range(len(data[col])) if i not in deleted_index]
