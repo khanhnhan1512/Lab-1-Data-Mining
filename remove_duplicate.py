@@ -1,8 +1,28 @@
 from main import *
 
+
 # Remove the duplicate rows
 def remove_duplicate(data) -> None:
-    pass 
+    # Use a dictionary to store the unique rows
+    unquie_rows = {}
+    # Use a list to store the index of the duplicate rows
+    deleted_index = []
+    total_row = len(data[list(data.keys())[0]])
+    for i in range(total_row):
+        row = []
+        for col in data.keys():
+            row.append(data[col][i])
+        # because set can't store list (unhashable), so convert the list to string  
+        if str(row) not in unquie_rows:
+            unquie_rows[str(row)] = 1
+        else:
+            deleted_index.append(i)
+    # Sort the deleted index list in descending for avoid deleting the wrong row
+    deleted_index.sort(reverse=True)
+    # delete the duplicate rows
+    for col in data.keys():
+        data[col] = [data[col][i] for i in range(len(data[col])) if i not in deleted_index]
+    print(f'The number of duplicate row: {len(deleted_index)}')
 
 def main():
     # get all the arguments from the command line

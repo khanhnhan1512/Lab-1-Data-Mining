@@ -47,8 +47,10 @@ def normalize(data, column, method):
         raise ValueError('Column must be numerical')
     if method == 'min-max':
         data[column] = min_max_method(data[column])
+        print(max(data[column]), min(data[column]))
     elif method == 'z-score':
         data[column] = zscore_method(data[column])
+        print(max(data[column]), min(data[column]))
     else:
         raise ValueError('Method must be min-max or z-score')
     
